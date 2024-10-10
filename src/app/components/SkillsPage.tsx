@@ -5,7 +5,6 @@ import { useRef } from "react";
 import useMotionAnimate from "../lib/useMotionAnimate";
 import { motion } from "framer-motion";
 import MotionDivWrapper from "../lib/MotionDivWrapper";
-import WordCloudComponent, { WordType } from "./WordCloudComponent";
 import SkillComponent from "./SkillComponent";
 
 export type SkillType = {
