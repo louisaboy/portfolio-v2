@@ -122,7 +122,7 @@ export default function ProjectsPage({ projects }: ProjectsPageInt) {
 
             </Flex>
             <Flex position="absolute" pt="12vh" zIndex={0}>
-                <Image src="/ellipse-background.png" h={{ base: "50vh", xl: "80vh" }} pointerEvents="none"
+                <Image src="/ellipse-background.png" alt="blurred circle" h={{ base: "50vh", xl: "80vh" }} pointerEvents="none"
                     style={{ WebkitTouchCallout: "none", WebkitUserSelect: "none" }} />
             </Flex>
         </Flex>

@@ -39,8 +39,7 @@ export default function AboutMePage() {
                 <Heading size={{ base: "xs", xl: "sm" }}>About me</Heading>
                 <Flex direction="column" gap={{ base: "12px", xl: "32px" }}>
                     <Text textAlign="justify" size={{ base: "sm", xl: "md" }}>
-                        I'm a freelance website developer with a BS in Computer Science, specializing in Software Technology from DLSU Manila.
-                        Currently, I work as a freelance developer, helping an emerging business through creating a user-friendly website.
+                        {"I'm a freelance website developer with a BS in Computer Science, specializing in Software Technology from DLSU Manila. Currently, I work as a freelance developer, helping an emerging business through creating a user-friendly website."}
                     </Text>
                     {/* <Text textAlign="justify">
                             I've also gained experience as a full-stack developer in a startup, working in Agile teams to deliver efficient digital solutions.

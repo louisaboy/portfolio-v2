@@ -36,9 +36,9 @@ export default function Footer() {
                 justifyContent="center" alignItems="center"
             >
                 <Heading size={{ base: "xs", xl: "sm" }} w="100%">
-                    Let's work together
+                    {"Let's work together"}
                 </Heading>
-                <Text size="md" w="100%">Contact me on the following platforms</Text>
+                <Text size="md" w="100%">{"Contact me on the following platforms"}</Text>
             </Flex>
             <Flex className="right-container" gap="16px"
                 w="100%"

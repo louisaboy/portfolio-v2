@@ -42,7 +42,7 @@ export default function useScrollEffects(
         return () => {
             window.removeEventListener("scroll", onScroll);
         };
-    }, [contentRef, threshold, verticalDisplacement]);
+    }, [contentRef, threshold, verticalDisplacement, handleScroll]);
 
     return style;
 }; 
