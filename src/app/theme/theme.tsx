@@ -25,8 +25,8 @@ const breakpoints = {
 
 export const colors = {
     primary: {
-        100: '#3f82e0',
-        200: '#4979bc',
+        100: '#FC00FF',
+        200: '#00DBDE',
     },
     secondary: {
         100: '',

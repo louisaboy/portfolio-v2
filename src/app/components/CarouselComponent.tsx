@@ -3,7 +3,6 @@ import React, { useEffect, useRef } from "react";
 import { useState } from "react";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
-import "../carousel.module.css"
 import { Project } from "../page";
 import ProjectCard from "./ProjectCard";
 import { CiCircleChevLeft, CiCircleChevRight } from "react-icons/ci";
@@ -17,11 +16,12 @@ export default function CarouselComponent({ displayedProjects }: CarouselCompone
         desktop: {
             breakpoint: { max: 3000, min: 1024 },
             items: 3,
-            slidesToSlide: 1 // optional, default to 1.
+            slidesToSlide: 1, // optional, default to 1.
+            // partialVisibilityGutter: 30,
         },
         tablet: {
             breakpoint: { max: 1024, min: 464 },
-            items: 2,
+            items: 1,
             slidesToSlide: 1 // optional, default to 1.
         },
         mobile: {
@@ -59,33 +59,35 @@ export default function CarouselComponent({ displayedProjects }: CarouselCompone
     const autoPlayCondition = useBreakpointValue({ base: true, md: false })
 
     return (
-        <div>
+        <div >
             <Carousel swipeable={true}
                 draggable={true}
                 showDots={true}
-                centerMode={true}
+                // centerMode={true}
                 responsive={responsive}
-                ssr={false}
+                // ssr={false}
                 infinite={true}
                 autoPlay={autoPlayCondition}
                 autoPlaySpeed={3000}
                 keyBoardControl={true}
                 // customTransition="all .5"
                 // transitionDuration={500}
-                containerClass="carousel-container"
+                // containerClass="carousel-container"
                 customLeftArrow={<CustomLeftArrow />}
                 customRightArrow={<CustomRightArrow />}
                 // arrows
                 // removeArrowOnDeviceType={["tablet", "mobile"]}
                 dotListClass="custom-dot-list-style"
-                itemClass="carousel-item"
+                // customTransition="all .5"
+                itemClass="carousel-item-padding-40-px"
+
             >
                 {
                     displayedProjects.map((project: Project, index: number) => {
                         // console.log("project", project)
                         return (
                             <Flex
-                                className="carousel-item"
+                                // className="carousel-item"
                                 // width="100%"  // Ensures the item takes full width
                                 // maxWidth="300px" // Set a maxWidth to avoid growing
                                 justifyContent="center"
