@@ -3,12 +3,14 @@ import { useEffect, useState } from "react";
 
 interface ScrollEffectsInt {
     threshold?: number,
-    verticalDisplacement?: number
+    verticalDisplacement?: number,
+    isStarting?: boolean
 }
 
 export default function useScrollEffects(
     contentRef: React.RefObject<HTMLDivElement>,
-    { threshold = 300, verticalDisplacement = 100 }: ScrollEffectsInt = {}) {
+    { threshold = 300, verticalDisplacement = 100, isStarting = false }: ScrollEffectsInt = {}
+) {
     const [style, setStyle] = useState({ opacity: 1, y: 0 });
 
     const calculateProgress = (distance: number, threshold: number) => {
@@ -29,6 +31,12 @@ export default function useScrollEffects(
         const viewportCenter = window.innerHeight / 2;
         const distance = elementCenter - viewportCenter;
 
+        // Check if the component is the starting component
+        if (isStarting && top >= 0) {
+            setStyle({ opacity: 1, y: 0 }); // No effect if at the top
+            return;
+        }
+
         const progress = calculateProgress(distance, threshold);
         const displacement = calculateDisplacement(distance, progress, verticalDisplacement);
 
@@ -42,7 +50,7 @@ export default function useScrollEffects(
         return () => {
             window.removeEventListener("scroll", onScroll);
         };
-    }, [contentRef, threshold, verticalDisplacement, handleScroll]);
+    }, [contentRef, threshold, verticalDisplacement, isStarting, handleScroll]);
 
     return style;
-}; 
+};
