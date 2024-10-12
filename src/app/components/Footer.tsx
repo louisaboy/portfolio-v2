@@ -24,11 +24,12 @@ export default function Footer() {
         <Flex id="footer"
             w="100vw" h="fit-content"
             maxW="100%"
-
             bg="background.100"
             {...ContainerPadding}
             wrap="wrap"
-            scrollSnapAlign={{ base: "end" }}
+            zIndex={2000}
+            position="inherit"
+            scrollSnapAlign={{ base: "none", xl: "end" }}
             scrollSnapStop={{ base: "always" }}
         >
             <Flex className="left-container" direction="column" gap="16px"

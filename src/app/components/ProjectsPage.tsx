@@ -1,5 +1,5 @@
 "use client"
-import { Button, Flex, Image, Heading } from "@chakra-ui/react";
+import { Button, Flex, Image, Text, Heading } from "@chakra-ui/react";
 import { ContainerPadding } from "../utils/layout-sizes";
 import { useCallback, useRef, useState } from "react";
 import MotionDivWrapper from "../lib/MotionDivWrapper";
@@ -18,11 +18,10 @@ interface ProjectsPageInt {
 }
 
 export default function ProjectsPage({ projects }: ProjectsPageInt) {
-    const [currentView, setCurrentView] = useState<string[]>([])
-    const [displayedProjects, setDisplayedProjects] = useState<Project[]>(projects)
+    const [currentView, setCurrentView] = useState<string[]>(["web-app"])
+    const [displayedProjects, setDisplayedProjects] = useState<Project[]>(projects.filter((project: Project) => { return currentView.includes(project.category) }))
 
     const viewOptions = [
-        // { label: "All", value: ["web-app", "ui-ux", "artworks"] },
         { label: "Website/Applications", value: "web-app" },
         { label: "User Interface/User Experience", value: "ui-ux" },
         { label: "Artworks", value: "artworks" },
@@ -34,7 +33,7 @@ export default function ProjectsPage({ projects }: ProjectsPageInt) {
         if (currentView?.includes(value)) {
             views = currentView.filter((view: string) => view != value)
         } else {
-            views = [...(currentView || []), value]
+            views = [value]
         }
         setCurrentView(views)
 
@@ -52,44 +51,22 @@ export default function ProjectsPage({ projects }: ProjectsPageInt) {
 
     const motionStyle = useMotionAnimate()
 
-    const responsive = {
-        superLargeDesktop: {
-            // the naming can be any, depends on you.
-            breakpoint: { max: 4000, min: 3000 },
-            items: 5,
-        },
-        desktop: {
-            breakpoint: { max: 3000, min: 1024 },
-            items: 3,
-            slidesToSlide: 3 // optional, default to 1.
-        },
-        tablet: {
-            breakpoint: { max: 1024, min: 480 },
-            items: 1,
-        },
-        mobile: {
-            breakpoint: { max: 480, min: 0 },
-            items: 1,
-            slidesToSlide: 1 // optional, default to 1.
-        }
-    };
-
     return (
         <Flex id="projects"
             w="100vw" h={{ base: "100vh" }}
             maxW="100%"
-
+            bg="background.200"
             {...ContainerPadding}
-            bg="background.200" color="foreground.100"
+            color="foreground.100"
             direction="column"
             gap="32px"
             alignItems="center" justifyContent="center"
             ref={contentRef}
-            scrollSnapAlign={{ base: "start" }}
+            scrollSnapAlign={{ base: "none", xl: "start" }}
             scrollSnapStop={{ base: "always" }}
         >
             <MotionDivWrapper parentProps={motionStyle} childStyle={headerStyle}>
-                <Flex className="header-container" justify="center">
+                <Flex className="header-container" justify="center" zIndex={2}>
                     <Heading size={{ base: "xs", xl: "sm" }}>Projects</Heading>
                 </Flex>
             </MotionDivWrapper>
@@ -98,7 +75,7 @@ export default function ProjectsPage({ projects }: ProjectsPageInt) {
                 justify="center"
                 gap="32px"
                 w="100%"
-                zIndex={1}
+                zIndex={2}
             >
                 <MotionDivWrapper parentProps={motionStyle} childStyle={mainCarouselStyle}>
                     <CarouselComponent displayedProjects={displayedProjects} />
@@ -112,7 +89,9 @@ export default function ProjectsPage({ projects }: ProjectsPageInt) {
                                     variant={currentView.includes(view.value) ? "solid" : "solid_light"}
                                     onClick={() => handleChangeView(view.value)}
                                 >
-                                    {view.label}
+                                    <Text size={{ base: "xs", xl: "sm" }} {...(currentView.includes(view.value) ? { color: "background.200", fontWeight: "bold" } : { color: "foreground.100" })}>
+                                        {view.label}
+                                    </Text>
                                 </Button>
                             )
                         }
@@ -120,10 +99,6 @@ export default function ProjectsPage({ projects }: ProjectsPageInt) {
                     </Flex>
                 </MotionDivWrapper>
 
-            </Flex>
-            <Flex position="absolute" pt="12vh" zIndex={0}>
-                <Image src="/ellipse-background.png" alt="blurred circle" h={{ base: "50vh", xl: "80vh" }} pointerEvents="none"
-                    style={{ WebkitTouchCallout: "none", WebkitUserSelect: "none" }} />
             </Flex>
         </Flex>
     )

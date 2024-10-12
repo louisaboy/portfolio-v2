@@ -22,14 +22,15 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={inter.className} >
+      <body style={{ background: "#242527" }} >
         <Providers>
           {/* <HandleScroll /> */}
-          <Navbar />
           <Suspense fallback={<Loading />}>
+
             {children}
+            <Footer />
+
           </Suspense>
-          <Footer />
         </Providers>
       </body>
     </html>
